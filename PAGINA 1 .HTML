@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Reproductor de Video</title>
+  <style>
+    body {
+      background: #111;
+      color: #fff;
+      font-family: Arial, sans-serif;
+      text-align: center;
+      padding: 20px;
+    }
+    video {
+      width: 80%;
+      max-width: 800px;
+      margin: 20px auto;
+      display: block;
+      border: 4px solid #00bfff;
+      border-radius: 10px;
+    }
+    button {
+      padding: 10px 20px;
+      margin: 5px;
+      font-size: 16px;
+      background: #00bfff;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    #video-title {
+      margin-top: 10px;
+      font-size: 18px;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>🎬 Reproductor de Video en HTML</h1>
+  <p id="video-title">Reproduciendo: video1.mp4</p>
+
+  <video id="player" controls autoplay>
+    <source src="video1.mp4" type="video/mp4">
+    Tu navegador no soporta HTML5 video.
+  </video>
+
+  <div>
+    <button onclick="playVideo(0)">Video 1</button>
+    <button onclick="playVideo(1)">Video 2</button>
+    <button onclick="playVideo(2)">Video 3</button>
+  </div>
+
+  <script>
+    const playlist = ["video1.mp4", "video2.mp4", "video3.mp4"];
+    let currentIndex = 0;
+    const player = document.getElementById("player");
+    const title = document.getElementById("video-title");
+
+    function playVideo(index) {
+      currentIndex = index;
+      player.src = playlist[currentIndex];
+      title.textContent = "Reproduciendo: " + playlist[currentIndex];
+      player.play();
+    }
+
+    player.addEventListener("ended", () => {
+      currentIndex++;
+      if (currentIndex < playlist.length) {
+        playVideo(currentIndex);
+      } else {
+        title.textContent = "🎉 Lista finalizada";
+      }
+    });
+  </script>
+
+</body>
+</html>
